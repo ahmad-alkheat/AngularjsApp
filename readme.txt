@@ -1,0 +1,1 @@
+A simple single-web app that I created when I learned Angular.js for the first time. It demonstrates Modules, controllers, directives, dependency injections. I used some Bootstrap too. 

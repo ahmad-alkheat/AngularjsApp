@@ -2,14 +2,56 @@
 <html ng-app="store">
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
 	<script type="text/javascript" src="app.js"></script>
 </head>
+
 <body ng-controller="storeController as store">
-<div ng-repeat="product in store.product">
-	<h1> {{product.name}} </h1>
-	<h2> {{product.price | currency}} </h2>
-	<button ng-show="store.product.canPurchase"> add to cart </button>
-</div>
+<ul class="list-group">
+	<li class="list-group-item" ng-repeat="product in store.product">
+		<h3 >
+			<product-name></product-name>
+			
+		</h3>
+		<section ng-controller="tabController">
+			<ul class="nav nav-pills">
+				<li ng-class="{active: IsSet(1)}"> <a href ng-click="SetTab(1)"> Description</a> </li>
+				<li ng-class="{active: IsSet(2)}"> <a href ng-click="SetTab(2)"> Reviews</a> </li>
+				<li ng-class="{active: IsSet(3)}"> <a href ng-click="SetTab(3)"> Specs</a> </li>
+			</ul>
+			
+
+			<div class="panel" ng-show="IsSet(1)">
+				<h4> Description </h4>
+				<p> {{product.description}} </p>
+			</div>
+			<div class="panel" ng-show="IsSet(2)">
+				<h4> Reviews</h4>
+				<blockquote ng-repeat="review in product.reviews">
+					{{review}}
+				</blockquote>
+				<form role="form" ng-controller="ReviewController" ng-submit="addReview(product)"   >
+					<blockquote>
+						{{review}}
+					</blockquote>
+  					<div class="form-group" >
+    					<label for="body">review </label>
+    					<textarea class="form-control" rows="3" ng-model="review"></textarea>
+  					</div>
+  					<button type="submit" value="submit" class="btn btn-success">Submit review</button>
+  				</form>
+  				
+			</div>
+			<div class="panel" ng-show="IsSet(3)">
+				<h4> Specifications</h4>
+				<blockquote>Not yet</blockquote>
+			</div>
+
+		</section>
+	</li>
+</ul>
+
+
+
 </body>
 </html>
